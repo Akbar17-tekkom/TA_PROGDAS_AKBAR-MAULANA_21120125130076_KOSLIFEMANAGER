@@ -1,0 +1,21 @@
+{
+    "todo": [],
+    "uang": [
+        {
+            "nominal": 10000,
+            "tipe": "masuk"
+        }
+    ],
+    "history": [
+        "[09:14] Pemasukan: +10000",
+        "[09:14] Hapus To-Do: b",
+        "[09:14] Selesai To-Do: b",
+        "[09:14] Tambah To-Do: b (-)",
+        "[09:14] Hapus To-Do: waktu",
+        "[09:14] Hapus To-Do: a",
+        "[09:08] Selesai To-Do: waktu",
+        "[09:08] Selesai To-Do: a",
+        "[09:08] Tambah To-Do: a (-)",
+        "[09:07] Tambah To-Do: waktu (-)"
+    ]
+}
