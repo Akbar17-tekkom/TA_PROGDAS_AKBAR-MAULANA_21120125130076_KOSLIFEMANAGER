@@ -133,7 +133,7 @@ class KosLifeManager:
             btn2 = tk.Button(frame_tombol, text="Keuangan", command=self.tampil_uang, width=8)
         btn2.pack(side="left", padx=8)
 
-        tk.Label(self.label1, text="Aktivitas Terbaru:", font=("Segoe UI", 12)).pack(anchor="w", padx=10, pady=(10, 0))
+        tk.Label(self.label1, text="Aktivitas Terakhir:", font=("Segoe UI", 12)).pack(anchor="w", padx=10, pady=(10, 0))
         self.history_frame = tk.Frame(self.label1)
         self.history_frame.pack(anchor="w", padx=20, pady=5)
         self.update_history_home()
@@ -158,7 +158,7 @@ class KosLifeManager:
         self.masuk_menit = tk.Entry(frame_jam, width=5)
         self.masuk_menit.grid(row=0, column=2)
 
-        tk.Button(frame_input, text="Tambah", command=self.tambah_todo).grid(row=0, column=1, padx=8)
+        tk.Button(frame_input, text="Tambah", bg="#4CAF50", fg="white", command=self.tambah_todo).grid(row=0, column=1, padx=8)
 
         tk.Button(frame_input, text="Hapus Terpilih", bg="#E53935", fg="white",
                   command=self.hapus_todo).grid(row=0, column=2, padx=5)
@@ -360,12 +360,19 @@ class KosLifeManager:
     def add_money(self, tipe):
         try:
             uang = int(self.masukkan_uang.get())
+
+            if uang <= 0:
+                messagebox.showerror("ERROR", "Nominal tidak boleh 0 atau negatif")
+                return
             if tipe == "keluar":
                 uang = -abs(uang)
 
             self.data.setdefault("uang", []).insert(0, {"nominal": uang, "tipe": tipe})
             self.simpan_data()
             self.update_riwayat_uang()
+
+            total_baru = self.hitung_total_uang()
+            self.label_total_saldo.config(text=f"Total Saldo: {total_baru}")
 
             if tipe == "masuk":
                 self.tambah_history(f"Pemasukan: +{abs(uang)}")
